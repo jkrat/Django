@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        .wrapper {
+            height: 700px;
+            width: 1000px;
+            background-color: rgb(233, 228, 235);
+            margin: 0px auto;
+            padding: 20px 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            height: 60px;
+        }
+        hr {
+            margin-top: .3rem;
+            background-color: rgb(84, 84, 194);
+        }
+        .right_head {
+            display: inline-block;
+            padding: 10px 20px 0px 10px;
+            margin-left: 15px;
+        }
+        #main {
+            width: 100%;
+            -ms-content-zoom-limit-min: 550px;
+            padding: 20px;
+
+            border-radius: 5px;
+        }
+        div.container1 {
+            margin: 40px 20px;
+            width: 70%;
+            border: 1px solid gray;
+            text-align: center;
+            border-radius: 5px;
+        }
+        div.container2 {
+            margin: 0px 20px;
+            width: 50%;
+            border: 1px solid gray;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .move {
+            margin-right: 50px;
+        }
+        h5 {
+            text-decoration: underline;
+        }
+        a {
+            text-decoration: underline;
+        }
+        .row {
+            margin: 20px 0px;
+            padding-left: 0px;
+        }
+        .col-11 {
+            padding-left: 0px;
+        }
+        .messages {
+            overflow: auto;
+        }
+        button {
+            float: right;
+            margin-right: 20px;
+        } 
+    </style>
+</head>
+<body>
+    <div class='wrapper'>
+        <div class="header">
+            <div>
+            <h4>Hello, {{ request.session.data.alias }}!</h4>
+            <p>Here is a list of your friends:</p>
+            </div>
+            <div>
+                <a href="{% url 'logout' %}" name="logout" class="right_head">Logout</a>
+            </div>
+        </div>
+        <hr>
+        <div id='main'>
+            
+            <div class="container1">
+                {% if not friends %}
+                <h2>You don't have any firends yet</h2>
+                {% endif %}
+                {% if friends %}
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Alias</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for friend in friends %}
+                    <tr>
+                        <th scope="row">{{ friend.alias }}</td>
+                        <td>
+                            <a class="sidebyside" href="/user/{{ friend.id }}">View Profile</a>
+                            <a class="sidebyside" href="/user/{{ friend.id }}/remove">Remove as Friend</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>   
+                </table>
+                {% endif %} 
+            </div>   
+            <p class="move">Other Users not on your friend's list:</p>
+            <div class="container2">
+                    {% if nonFriends %}
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Alias</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for nonFriend in nonFriends %}
+                        <tr>
+                            <th scope="row">
+                                <a href="/user/{{ nonFriend.id }}">{{ nonFriend.alias }}</a>
+                            </th>
+                            <td>
+                                <a class="sidebyside" href="/user/{{ nonFriend.id }}/add"><button class="btn btn-secondary">Add as Friend</button></a>
+                            </td>
+                        </tr>
+                        {% endfor %} 
+                    </tbody>   
+                </table>
+                {% endif %}
+            </div>    
+        </div>
+    </div>
+</body>
+</html>

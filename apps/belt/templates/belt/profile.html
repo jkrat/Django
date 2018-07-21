@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>user info</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        .wrapper {
+            height: 700px;
+            width: 1000px;
+            background-color: rgb(233, 228, 235);
+            margin: 0px auto;
+            padding: 20px 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            height: 40px;
+        }
+        hr {
+            margin-top: .3rem;
+            background-color: rgb(84, 84, 194);
+        }
+        .right_head {
+            display: inline-block;
+            padding: 10px 20px 0px 10px;
+            margin-left: 15px;
+        }
+        #main {
+            width: 100%;
+            max-height: 550px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 5px;
+        }
+        div.container {
+            margin: 20px;
+            width: 400px;
+        }
+        h5 {
+            text-decoration: underline;
+        }
+        a {
+            text-decoration: underline;
+        }
+        .trash_container {
+            padding: 0px;
+        }
+        .row {
+            margin: 20px 0px;
+            padding-left: 0px;
+        }
+        .col-11 {
+            padding-left: 0px;
+        }
+        .messages {
+            overflow: auto;
+        }
+        button {
+            float: right;
+            margin-right: 20px;
+        } 
+        ul {
+            list-style: none;
+        }
+        li {
+            margin: 30px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class='wrapper'>
+        <div class="header">
+            <h3></h3>
+            <div>
+                <a href="{% url 'wall' %}" name="home" class="right_head">Home</a>
+                <a href="{% url 'logout' %}" name="logout" class="right_head">log off</a>
+            </div>
+        </div>
+        <hr>
+        <div id='main'>
+            <div class="container">
+                <h2>{{ user.alias }}'s Profile</h2>
+                <ul>
+                    <li>Name: {{ user.name }}</li>
+                    <li>Email: {{ user.email }}</li>
+                </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
